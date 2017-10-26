@@ -12,6 +12,7 @@ class PostAdmin(admin.ModelAdmin):
     ordering = ['status', 'publish']
 admin.site.register(Post, PostAdmin)
 
+
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'post', 'created', 'active')
     list_filter = ('active', 'created', 'updated')

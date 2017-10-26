@@ -4,9 +4,11 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from taggit.managers import TaggableManager
 
+
 class PublishedManager(models.Manager):
     def get_queryset(self):
         return super(PublishedManager, self).get_queryset().filter(status='published')
+
 
 class Post(models.Model):
     STATUS_CHOICES = (
@@ -39,6 +41,7 @@ class Post(models.Model):
                                                  self.publish.strftime('%d'),
                                                  self.slug])
 
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments')
     name = models.CharField(max_length=80)
@@ -51,5 +54,5 @@ class Comment(models.Model):
     class Meta:
         ordering = ('created',)
 
-        def __str__(self):
-            return 'Comment by {} on {}'.format(self.name, self.post)
+    def __str__(self):
+        return 'Comment by {} on {}'.format(self.name, self.post)
