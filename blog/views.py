@@ -21,6 +21,11 @@ def post_list(request, tag_slug=None):
 
     paginator = Paginator(object_list, 3) # 3 posts in each page
     page = request.GET.get('page')
+    selects = []
+    for num in range(1, paginator.num_pages+1):
+        selects.append(num)
+
+
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
@@ -31,7 +36,8 @@ def post_list(request, tag_slug=None):
         posts = paginator.page(paginator.num_pages)
     return render(request, 'blog/post/list.html', {'page': page,
                                                    'posts': posts,
-                                                   'tag': tag})
+                                                   'tag': tag,
+                                                   'test': selects})
 
 
 class PostListView(ListView):

@@ -1,15 +1,24 @@
 <div class="pagination">
     <span class="step-links">
         {% if page.has_previous %}
-            <a href="?page={{ page.previous_page_number }}">Previous</a>
+            <a class="btn btn-outline-primary" href="?page={{ page.previous_page_number }}">Previous</a>
         {% endif %}
 
         <span class="current">
-            Page {{ page.number }} of {{ page.paginator.num_pages }}.
+            Page <select class="selector" onchange="window.location.href='?page='+this.value;">
+                {% for t in test %}
+                    <option value ="{{ t }}">{{ t }}</option>
+                {% endfor %}
+            </select>
+             of {{ page.paginator.num_pages }}
+            <!--Page {{ page.number }} of {{ page.paginator.num_pages }}-->
         </span>
-
+<script type='text/javascript'>
+    $(".selector").val("{{ page.number }}");
+    console.log("test");
+</script>
         {% if page.has_next %}
-            <a href="?page={{ page.next_page_number }}">Next</a>
+            <a class="btn btn-outline-primary" href="?page={{ page.next_page_number }}">Next</a>
         {% endif %}
     </span>
 </div>
